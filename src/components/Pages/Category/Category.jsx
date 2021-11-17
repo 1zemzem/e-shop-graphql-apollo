@@ -1,18 +1,54 @@
 import React, { Component } from "react";
-//import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
+import client from "../../../services/apollo";
 import styled from "styled-components";
 
-
-// const GET_PRODUCTS = gql`
+// const CATEGORIES_FULL = gql`
 //   query {
-//     
+//     category(input: { title: "clothes" }) {
+//       name
+//       products {
+//         id
+//         name
+//         inStock
+//         gallery
+//         prices {
+//           currency
+//           amount
+//         }
+//         attributes {
+//           name
+//           items {
+//             displayValue
+//             value
+//           }
+//         }
+//       }
+//     }
 //   }
 // `;
+
+const GET_PRODUCTS = gql`
+  query {
+    category(input: { title: "clothes" }) {
+      products {
+        id
+        name
+        inStock
+        gallery
+        prices {
+          currency
+          amount
+        }
+      }
+    }
+  }
+`;
 
 const Section = styled.div`
   width: 100%;
   padding-top: 40px;
-  padding-bottom: 71px;
+  padding-bottom: 72px;
 `;
 
 const Title = styled.h1`
@@ -61,16 +97,42 @@ const ProductCardPrice = styled.div`
 `;
 
 class Category extends Component {
+  // constructor(props) {
+  // super(props);
+  // this.state = {
+
+  // }
+
+  // }
+  componentDidMount() {
+    client
+      .query({
+        query: GET_PRODUCTS,
+      })
+      .then((result) => this.setState(result.data))
+      .catch(console.log);
+  }
   render() {
+    console.log(this.state);
+    const { products } = this.state?.category || {};
     return (
       <Section>
         <Title>Category name</Title>
         <Catalog>
-          <ProductCard>
-            <img src="" alt="fff" />
-            <ProductCardTitle>Apollo Running Short</ProductCardTitle>
-            <ProductCardPrice>50$</ProductCardPrice>
-          </ProductCard>
+          {products?.map((product) => {
+            const price = product.prices.find(
+              (price) => price.currency === "USD"
+            );
+            return (
+              <ProductCard key={product.id}>
+                <img src={product.gallery[3]} alt={product.name} width="80px" />
+                <ProductCardTitle>{product.name}</ProductCardTitle>
+                <ProductCardPrice>
+                  {price?.amount} {price?.currency}
+                </ProductCardPrice>
+              </ProductCard>
+            );
+          })}
           <ProductCard>
             <img src="" alt="fff" />
             <ProductCardTitle>Apollo Running Short</ProductCardTitle>

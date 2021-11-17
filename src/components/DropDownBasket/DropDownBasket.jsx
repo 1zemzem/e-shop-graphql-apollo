@@ -2,29 +2,26 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const Section = styled.div`
-  max-width: 100%;
-  padding-top: 80px;
-  padding-bottom: 54px;
+  max-width: 325px;
+  max-height: 540px;
+  padding: 8px 16px 20px 16px;
   display: flex;
   flex-direction: column;
 `;
 
 const Title = styled.h2`
-  font-family: Raleway;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 32px;
-  line-height: 40px;
-  text-transform: uppercase;
+font-family: Raleway;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 160%;
   color: #1d1f22;
   padding-bottom: 59px;
 `;
 
 const ProductDescription = styled.div`
-  max-width: 1097px;
-  border-top: 1px solid #e5e5e5;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 25px;
+  padding-bottom: 44px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -45,8 +42,8 @@ const ProductSizesItem = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 63px;
-  height: 45px;
+  width: 24px;
+  height: 24px;
   background-color: transparent;
   border: 1px solid #1d1f22;
   font-family: Source Sans Pro;
@@ -71,13 +68,15 @@ const NumberOfProductsInCart = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: 12px;
+  margin-right: 10px;
 `;
 
 const ButtonNumberOfProductsInCart = styled.button`
+  width: 24px;
+  height: 24px;
   background-color: transparent;
   &:active {
-    color: #1d1f22;
+    color: #A6A6A6;
   }
 `;
 
@@ -92,11 +91,23 @@ const Number = styled.div`
   color: #1d1f22;
 `;
 
-class Basket extends Component {
+const TotalLine = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+`;
+
+const ButtonLine = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+`;
+
+class DropDownBasket extends Component {
   render() {
     return (
       <Section>
-        <Title>Cart</Title>
+        <Title>Mu Bag<span>2 items</span></Title>
         <ProductDescription>
           <ProductInfo>
             <h2>Apollo</h2>
@@ -123,9 +134,17 @@ class Basket extends Component {
             <img src="" alt="fff" />
           </ProductsInCart>
         </ProductDescription>
+        <TotalLine>
+        <div>Total</div>
+        <div>100</div>
+        </TotalLine>
+        <ButtonLine>
+          <button>View bag</button>
+          <button>CHECK OUT</button>
+        </ButtonLine>
       </Section>
     );
   }
 }
 
-export default Basket;
+export default DropDownBasket;

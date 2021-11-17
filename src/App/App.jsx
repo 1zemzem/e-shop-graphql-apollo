@@ -9,10 +9,12 @@ import Basket from "../components/Pages/Basket";
 
 const AppWrapper = styled.div`
   min-height: 100vh;
-  padding-left: 101px;
-  padding-right: 101px;
+  padding-left: 7vw;
+  padding-right: 7vw;
   font-family: Raleway;
 `;
+
+
 class App extends Component {
   render() {
     return (
